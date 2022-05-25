@@ -57,7 +57,7 @@ h1{
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid;
+    border: 1px solid white;
 }
 
 .pokemon-area .pokemon .pokemon-image{
@@ -92,8 +92,9 @@ h1{
 
 /*MODAL INFO POKÉMONS*/
 .modal-pokemon{
-    position: absolute;
+    position: fixed;
     padding: 200px 0;
+    top: 0;
     height: 100%;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.6);
