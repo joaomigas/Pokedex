@@ -1,28 +1,44 @@
-async function getAllPokemons(){
-    let body= document.querySelector('body');
-    let pokemonArea= document.createElement('div');
-    pokemonArea.setAttribute('class', 'pokemon-area');
-    body.appendChild(pokemonArea);
+document.addEventListener('scroll',()=>{
+    const {scrollTop, scrollHeight, clientHeight}= document.documentElement;
+    if(scrollTop+clientHeight >= scrollHeight-5){
+        getAllPokemons();
+    }
+});
 
-    for(i=1; i<=12; i++){
-        let pokemons= await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`); 
-        let arrayOfPokemons= await pokemons.json();
+let body= document.querySelector('body');
+let pokemonArea= document.createElement('div');
+pokemonArea.setAttribute('class', 'pokemon-area');
+body.appendChild(pokemonArea);
+
+let numberIds= [];
+
+async function getAllPokemons(){
+    const allPokemons= await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${numberIds.length}&limit=12/`);
+    const allPokemonsJson= await allPokemons.json();
+    
+    for(i=1; i<=allPokemonsJson.results.length; i++){
+        numberIds.push('');
+
+        let pokemonsLink= allPokemonsJson.results[i-1].url;
+        let pokemons= await fetch(`${pokemonsLink}`);
+        let arrayOfPokemons= await pokemons.json()
+        console.log(arrayOfPokemons.id)
 
         let pokemon= document.createElement('section');
         pokemon.setAttribute('class', 'pokemon');
-        pokemon.setAttribute('data-pokemon-id', i);
+        pokemon.setAttribute('data-pokemon-id', arrayOfPokemons.id);
         pokemonArea.appendChild(pokemon);
 
         let pokemonImage= document.createElement('img');
         pokemonImage.setAttribute('class', 'pokemon-image');
-        pokemonImage.setAttribute('data-pokemon-image', i);
+        pokemonImage.setAttribute('data-pokemon-image', arrayOfPokemons.id);
         pokemonImage.src= arrayOfPokemons.sprites.front_default;
         pokemonImage.alt= arrayOfPokemons.species.name;
         pokemon.appendChild(pokemonImage);
 
         let pokemonName= document.createElement('p');
         pokemonName.setAttribute('class', 'pokemon-name');
-        pokemonName.setAttribute('data-pokemon-name', i);
+        pokemonName.setAttribute('data-pokemon-name', arrayOfPokemons.id);
         pokemonName.innerText= arrayOfPokemons.species.name;
         pokemon.appendChild(pokemonName);
 
@@ -44,45 +60,43 @@ async function getAllPokemons(){
 
         //DETAILS OF POKEMON FOR MODAL
         let abilitie1= document.createElement('p');
-        abilitie1.setAttribute('data-abilitie-one', i);
+        abilitie1.setAttribute('data-abilitie-one', arrayOfPokemons.id);
         abilitie1.innerText= `abilitie 1: ${arrayOfPokemons.abilities[0].ability.name}`;
         abilitie1.style.display="none";
-        body.appendChild(abilitie1);
-
+        pokemon.appendChild(abilitie1);
+        
         if(arrayOfPokemons.abilities[1]){
             let abilitie2= document.createElement('p');
-            abilitie2.setAttribute('data-abilitie-two', i);
+            abilitie2.setAttribute('data-abilitie-two', arrayOfPokemons.id);
             abilitie2.innerText= `abilitie 2: ${arrayOfPokemons.abilities[1].ability.name}`;
             abilitie2.style.display="none";
-            body.appendChild(abilitie2);
+            pokemon.appendChild(abilitie2);
         }
 
         let baseExp= document.createElement('p');
-        baseExp.setAttribute('data-exp', i);
+        baseExp.setAttribute('data-exp', arrayOfPokemons.id);
         baseExp.innerText= `base exp: ${arrayOfPokemons.base_experience}`;
         baseExp.style.display="none";
-        body.appendChild(baseExp);
+        pokemon.appendChild(baseExp);
 
         let heightPokemon= document.createElement('p');
-        heightPokemon.setAttribute('data-height', i);
+        heightPokemon.setAttribute('data-height', arrayOfPokemons.id);
         heightPokemon.innerText= `height: ${arrayOfPokemons.height} cm`;
         heightPokemon.style.display="none";
-        body.appendChild(heightPokemon);
+        pokemon.appendChild(heightPokemon);
 
         let weightPokemon= document.createElement('p');
-        weightPokemon.setAttribute('data-weight', i);
-        weightPokemon.innerText= `weight: ${arrayOfPokemons.weight} kg`;
+        weightPokemon.setAttribute('data-weight', arrayOfPokemons.id);
+        weightPokemon.innerText= `weight: ${arrayOfPokemons.weight} lb`;
         weightPokemon.style.display="none";
-        body.appendChild(weightPokemon);
+        pokemon.appendChild(weightPokemon);
         //DETAILS OF POKEMON FOR MODAL END
-        
-        console.log(arrayOfPokemons);   
+      
+      
     }
+
 }
 getAllPokemons();
-
-
-
 
 document.addEventListener('click', (e)=>{
     if(e.target.classList[0]==="close-button" || e.target.classList[0]==="modal-pokemon"){
@@ -144,7 +158,8 @@ function openInfoPokemons(id){
     abilitie1.setAttribute('class','details-pokemon');
     infoPokemon.appendChild(abilitie1);
     abilitie1.innerText= document.querySelector(`[data-abilitie-one="${id}"]`).innerText;
-
+   
+    
     let abilitie2= document.createElement('p');
     abilitie2.setAttribute('class','details-pokemon');
     infoPokemon.appendChild(abilitie2);

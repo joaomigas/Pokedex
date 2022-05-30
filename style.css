@@ -45,7 +45,7 @@ h1{
 }
 
 .pokemon:hover::before{
-    content: 'Mais Informações';
+    content: 'More Info';
     position: absolute;
     background-color: rgba(0, 0, 0, 0.6);
     height: 100%;
@@ -89,6 +89,7 @@ h1{
     color: white;
     font-size: 18px;
 }
+
 
 /*MODAL INFO POKÉMONS*/
 .modal-pokemon{
