@@ -34,7 +34,7 @@ const pokemonsColorTypes = {
 
 let numberIds= [];
 
-async function getAllPokemons(){
+async function getAllPokemons() {
     const allPokemons= await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${numberIds.length}&limit=12/`);
     const allPokemonsJson= await allPokemons.json();
     
