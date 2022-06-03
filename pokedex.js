@@ -5,10 +5,32 @@ document.addEventListener('scroll',()=>{
     }
 });
 
-let body= document.querySelector('body');
-let pokemonArea= document.createElement('div');
+let body = document.querySelector('body');
+let pokemonArea = document.createElement('div');
 pokemonArea.setAttribute('class', 'pokemon-area');
 body.appendChild(pokemonArea);
+
+const pokemonsColorTypes = {
+    fire: '#b00',
+    poison: '#993366',
+    grass: '#00cc66',
+    water: '#3333cc',
+    bug: '#b3b3b3',
+    flying: '#0099ff',
+    normal: '#1b252f',
+    electric: '#ffcc00',
+    ground: '#663300',
+    fairy: '#ff6699',
+    psychic: '#993366',
+    fighting: '#0d0d0d',
+    rock: '#1a0d00',
+    ice: '#99ccff',
+    steel: '#8c8c8c',
+    ghost: '#191970',
+    dark: '#09092a',
+    dragon: '#cc0000',
+}
+
 
 let numberIds= [];
 
@@ -21,8 +43,8 @@ async function getAllPokemons(){
 
         let pokemonsLink= allPokemonsJson.results[i-1].url;
         let pokemons= await fetch(`${pokemonsLink}`);
-        let arrayOfPokemons= await pokemons.json()
-        console.log(arrayOfPokemons.id)
+        let arrayOfPokemons= await pokemons.json();
+        console.log(arrayOfPokemons)
 
         let pokemon= document.createElement('section');
         pokemon.setAttribute('class', 'pokemon');
