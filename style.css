@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+  }
+
 body{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     background-color: #1b252f;
@@ -17,6 +21,73 @@ h1{
     margin-bottom: 40px;
 }
 
+
+.fire{
+    background-color: #b00;
+}
+.poison{
+    background-color: #993366;
+}
+.grass{
+    background-color: #00cc66;
+}
+.water{
+    background-color: #3333cc;
+}
+.bug{
+    background-color: #b3b3b3;
+}
+.flying{
+    background-color: #0099ff;
+}
+.normal{
+    background-color: #1b252f;
+}
+.electric {
+    background-color: #ffcc00;
+}
+
+.ground {
+    background-color: #663300;
+}
+
+.fairy {
+    background-color: #ff6699;
+}
+
+.psychic {
+    background-color: #993366;
+}
+
+.fighting {
+    background-color: #0d0d0d;
+}
+
+.rock {
+    background-color: #1a0d00;
+}
+
+.ice {
+    background-color: #99ccff;
+}
+
+.steel {
+    background-color: #8c8c8c;
+}
+
+.ghost {
+    background-color: #191970;
+}
+
+.dark {
+    background-color: #09092a;
+}
+
+.dragon {
+    background-color: #cc0000;
+}
+
+
 .pokemon-area{
     width: 70%;
     background-color: #405366;
@@ -26,6 +97,7 @@ h1{
     margin: 0 auto;
     padding: 16px;
     border-radius: 5px;
+    position: relative;
 }
 
 .pokemon-area .pokemon{
@@ -74,7 +146,6 @@ h1{
     margin-bottom: 20px;
 }
 .pokemon-area .pokemon .pokemon-powers .power1{
-    background-color: green;
     padding: 10px;
     border-radius: 5px;
     color: white;
@@ -83,7 +154,6 @@ h1{
 }
 
 .pokemon-area .pokemon .pokemon-powers .power2{
-    background-color: purple;
     padding: 10px;
     border-radius: 5px;
     color: white;
